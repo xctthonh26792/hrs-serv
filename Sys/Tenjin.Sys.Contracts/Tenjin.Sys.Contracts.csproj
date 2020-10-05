@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Cores\Tenjin.Contracts\Tenjin.Contracts.csproj" />
+    <ProjectReference Include="..\Tenjin.Sys.Models\Tenjin.Sys.Models.csproj" />
+  </ItemGroup>
+
+</Project>
