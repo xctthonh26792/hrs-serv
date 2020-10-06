@@ -2,6 +2,8 @@
 using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Tenjin.Reflections;
 using Tenjin.Services;
@@ -132,6 +134,51 @@ namespace Tenjin.Sys.Services
             await base.InitializeInsertModel(entity);
             entity.IsPublished = true;
             entity.DefCode = string.IsNullOrEmpty(entity.DefCode) ? await GenerateCode() : entity.DefCode;
+        }
+
+        public async Task Import(IEnumerable<EmployeeCourse> entities)
+        {
+            var models = new List<WriteModel<EmployeeCourse>>();
+            if (entities != null && entities.Any())
+            {
+                foreach (var entity in entities)
+                {
+                    await InitializeInsertModel(entity);
+                    Expression<Func<EmployeeCourse, bool>> filter = x => x.DefCode == entity.DefCode;
+                    var updater = Builders<EmployeeCourse>.Update
+                        .Set(x => x.EmployeeCode, entity.EmployeeCode)
+                        .Set(x => x.FacutlyCode, entity.FacutlyCode)
+                        .Set(x => x.CourseCode, entity.CourseCode)
+                        .Set(x => x.MajorCode, entity.MajorCode)
+                        .Set(x => x.TimeStart, entity.TimeStart)
+                        .Set(x => x.TimeEnd, entity.TimeEnd)
+                        .Set(x => x.Start, entity.Start)
+                        .Set(x => x.End, entity.End)
+                        .Set(x => x.CourseStart, entity.CourseStart)
+                        .Set(x => x.CourseEnd, entity.CourseEnd)
+                        .Set(x => x.MajorCode, entity.MajorCode)
+                        .Set(x => x.ValueToSearch, entity.ValueToSearch)
+                        .Set(x => x.CreatedDate, entity.CreatedDate)
+                        .Set(x => x.IsPublished, entity.IsPublished)
+                        .Set(x => x.LastModified, entity.LastModified);
+
+                    var model = new UpdateOneModel<EmployeeCourse>(filter, updater)
+                    {
+                        IsUpsert = true
+                    };
+                    models.Add(model);
+                    if (models.Count >= 1000)
+                    {
+                        await _context.EmployeeCourseRepository.BulkWrite(models);
+                        models.Clear();
+                    }
+                }
+                if (models.Count > 0)
+                {
+                    await _context.EmployeeCourseRepository.BulkWrite(models);
+                    models.Clear();
+                }
+            }
         }
     }
 }
