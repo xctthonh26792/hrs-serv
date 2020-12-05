@@ -10,5 +10,7 @@
 
         public long TotalIntership { get; set; }
 
+        public long TotalEmployeeInterships { get; set; }
+
     }
 }

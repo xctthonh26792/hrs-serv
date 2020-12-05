@@ -19,5 +19,8 @@ namespace Tenjin.Sys.Models.Entities
 
         [BsonProperty(BsonDirection.DESC)]
         public string TimeEnd { get; set; }
+
+        [BsonProperty(BsonDirection.DESC)]
+        public double CourseTime { get; set; }
     }
 }

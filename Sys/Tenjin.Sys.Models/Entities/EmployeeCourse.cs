@@ -33,6 +33,9 @@ namespace Tenjin.Sys.Models.Entities
         [BsonProperty(BsonDirection.DESC)]
         public ObjectId MajorCode { get; set; }
 
+        [BsonProperty(BsonDirection.DESC)]
+        public double CourseTime { get; set; }
+
         [BsonElement]
         public string CourseStart => $"{Start} {TimeStart}";
 

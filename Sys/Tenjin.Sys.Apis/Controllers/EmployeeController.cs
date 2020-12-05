@@ -69,7 +69,7 @@ namespace Tenjin.Sys.Apis.Controllers
                 buffer.Employee.CreatedDate = DateTime.Now;
                 buffer.Employee.LastModified = DateTime.Now;
                 buffer.Employee.IsPublished = true;
-                if(string.IsNullOrEmpty(staff.FacutlyCode.ToString()))
+                if(string.IsNullOrEmpty(staff?.FacutlyCode.ToString()))
                 {
                     buffer.Errors.Add("Mã khoa trống");
                     buffer.Index = row;

@@ -154,6 +154,7 @@ namespace Tenjin.Sys.Services
                         .Set(x => x.TimeEnd, entity.TimeEnd)
                         .Set(x => x.Start, entity.Start)
                         .Set(x => x.End, entity.End)
+                        .Set(x => x.CourseTime, entity.CourseTime)
                         .Set(x => x.CourseStart, entity.CourseStart)
                         .Set(x => x.CourseEnd, entity.CourseEnd)
                         .Set(x => x.MajorCode, entity.MajorCode)

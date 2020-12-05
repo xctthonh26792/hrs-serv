@@ -33,11 +33,15 @@ namespace Tenjin.Sys.Helpers
             foreach (Row row in sheet.Descendants<Row>().Skip(skip))
             {
                 index++;
-                models.Add(new SpreadsheetModel
+                var model = Convert(row);
+                if (model != null)
                 {
-                    Row = index,
-                    Model = Convert(row)
-                });
+                    models.Add(new SpreadsheetModel
+                    {
+                        Row = index,
+                        Model = Convert(row)
+                    });
+                }
             }
             return models;
         }
@@ -77,7 +81,7 @@ namespace Tenjin.Sys.Helpers
                 return def;
             }
             var shared = _document.WorkbookPart.SharedStringTablePart;
-            var value = cell.CellValue.InnerXml;
+            var value = cell.CellValue?.InnerXml ?? string.Empty;
             if (cell.DataType != null && cell.DataType.Value == CellValues.SharedString)
             {
                 return shared.SharedStringTable.ChildElements[TenjinConverts.GetInt32(value)].InnerText;

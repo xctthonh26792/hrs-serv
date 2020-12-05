@@ -34,6 +34,12 @@ namespace Tenjin.Sys.Apis.Controllers
             return Ok(await _service.GetEmployeeCourseByEmployeeAndTime(query));
         }
 
+        [HttpPost("coursebycourse")]
+        public async Task<IActionResult> GetCourseByCourse([FromBody] ReportQuery query)
+        {
+            return Ok(await _service.GetCourseByCourse(query));
+        }
+
         [HttpPost("intershipbycenter")]
         public async Task<IActionResult> GetIntershipByCenterAndTime([FromBody] ReportQuery query)
         {
@@ -45,5 +51,12 @@ namespace Tenjin.Sys.Apis.Controllers
         {
             return Ok(await _service.GetIntershipByFacutlyAndTime(query));
         }
+
+        [HttpPost("coursetime")]
+        public async Task<IActionResult> GetTotalTimeByEmployeeAndTime([FromBody] ReportQuery query)
+        {
+            return Ok(await _service.GetTotalTimeByEmployeeAndTime(query));
+        }
+        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
+using System.Net.Cache;
 using Tenjin.Sys.Models.Entities;
 
 namespace Tenjin.Sys.Models.Views
@@ -13,5 +14,6 @@ namespace Tenjin.Sys.Models.Views
         public Facutly Facutly { get; set; }
 
         public Major Major { get; set; }
+
     }
 }

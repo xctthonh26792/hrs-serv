@@ -13,6 +13,15 @@ namespace Tenjin.Sys.Models.Cores
 
         public IEnumerable<ObjectId> FacutlyCodes { get; set; }
 
+        public IEnumerable<ObjectId> CourseCodes { get; set; }
+
+        public bool IsAllCenter { get; set; }
+
+        public bool IsAllEmployee { get; set; }
+
+        public bool IsAllFacutly { get; set; }
+        public bool IsAllCourse { get; set; }
+
         public string Start { get; set; }
 
         public string End { get; set; }

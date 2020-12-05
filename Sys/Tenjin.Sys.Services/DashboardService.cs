@@ -21,12 +21,15 @@ namespace Tenjin.Sys.Services
         {
             var from = DateTimeExtensions.GetFirstDayOfMonth(DateTime.Now).ToString("yyyy-MM-dd");
             var to = DateTimeExtensions.GetLastDayOfMonth(DateTime.Now).ToString("yyyy-MM-dd");
-            return  new Dashboard
+            var start_year = DateTimeExtensions.GetFirstDayOfYear(DateTime.Now).ToString("yyyy-MM-dd");
+            var end_year = DateTimeExtensions.GetLastDayOfYear(DateTime.Now).ToString("yyyy-MM-dd");
+            return new Dashboard
             {
                 TotalIntership = await FetchIntership(from, to),
                 TotalEmployee = await CountEmployee(),
                 TotalStudent = await CountStudent(),
-                TotalCourse = await FetchCourse(from, to)
+                TotalCourse = await FetchCourse(from, to),
+                TotalEmployeeInterships = await FetchIntershipInYear(start_year, end_year)
             };
 
             async Task<long> CountEmployee()
@@ -64,6 +67,33 @@ namespace Tenjin.Sys.Services
                     )
                 );
                 return await _context.EmployeeCourseRepository.Count(expression);
+            }
+
+            async Task<long> FetchIntershipInYear(string from, string to)
+            {
+                var expression =
+                    Builders<Intership>.Filter.And(
+                        Builders<Intership>.Filter.Eq(x => x.IsPublished, true),
+                        Builders<Intership>.Filter.Or(
+                            Builders<Intership>.Filter.And(
+                                Builders<Intership>.Filter.Lte(x => x.Start, from),
+                                Builders<Intership>.Filter.Gte(x => x.End, to)
+                            ),
+                            Builders<Intership>.Filter.And(
+                                Builders<Intership>.Filter.Gte(x => x.Start, from),
+                                Builders<Intership>.Filter.Lte(x => x.End, to)
+                            ),
+                            Builders<Intership>.Filter.And(
+                                Builders<Intership>.Filter.Lte(x => x.Start, from),
+                                Builders<Intership>.Filter.Gte(x => x.End, from)
+                            ),
+                            Builders<Intership>.Filter.And(
+                                Builders<Intership>.Filter.Lte(x => x.Start, to),
+                                Builders<Intership>.Filter.Gte(x => x.End, to)
+                            )
+                    )
+                );
+                return await _context.IntershipRepository.Count(expression);
             }
 
             async Task<long> FetchIntership(string from, string to)

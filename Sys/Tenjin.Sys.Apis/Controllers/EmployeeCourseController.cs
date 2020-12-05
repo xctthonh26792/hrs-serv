@@ -136,6 +136,7 @@ namespace Tenjin.Sys.Apis.Controllers
                         buffer.EmployeeCourse.End = course.End;
                         buffer.EmployeeCourse.TimeStart = course.TimeStart;
                         buffer.EmployeeCourse.TimeEnd = course.TimeEnd;
+                        buffer.EmployeeCourse.CourseTime = course.CourseTime;
                     }
                 }
                 

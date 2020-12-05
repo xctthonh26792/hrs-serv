@@ -13,9 +13,14 @@ namespace Tenjin.Sys.Apis.ExcelReaders
         protected override EmployeeModel Convert(Row row)
         {
             var maps = row.ToColumnDictionary();
+            var code = GetString(maps.Cell(1));
+            if (Tenjin.Helpers.TenjinUtils.IsStringEmpty(code))
+            {
+                return null;
+            }
             return new EmployeeModel
             {
-                Code = GetString(maps.Cell(1)),
+                Code = code,
                 Name = GetString(maps.Cell(2)),
                 DateOfBirth = GetDate(maps.Cell(3), "dd/MM/yyyy").ToString("yyyy-MM-dd"),
                 Email = GetString(maps.Cell(4)),
