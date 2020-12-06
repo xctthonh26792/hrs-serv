@@ -60,6 +60,7 @@ namespace Tenjin.Sys.Apis
             services.AddScoped<IReportService, ReportService>();
             services.AddScoped<IDashboardService, DashboardService>();
             services.AddScoped<ILogService, LogService>();
+            services.AddScoped<IClassroomService, ClassroomService>();
 
             TenjinStartupHelper.ConfigureServices(services);
         }

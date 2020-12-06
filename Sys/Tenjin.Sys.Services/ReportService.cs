@@ -203,6 +203,40 @@ namespace Tenjin.Sys.Services
 
         }
 
+
+        public async Task<IEnumerable<IntershipView>> GetIntershipByClassroomAndTime(ReportQuery query)
+        {
+            var service = _provider.GetRequiredService<IIntershipService>();
+            var expression =
+                    Builders<Intership>.Filter.And(
+                        Builders<Intership>.Filter.Eq(x => x.IsPublished, true),
+                        Builders<Intership>.Filter.Or(
+                            Builders<Intership>.Filter.And(
+                                Builders<Intership>.Filter.Lte(x => x.Start, query.Start),
+                                Builders<Intership>.Filter.Gte(x => x.End, query.Start)
+                            ),
+                            Builders<Intership>.Filter.And(
+                                Builders<Intership>.Filter.Lte(x => x.Start, query.Start),
+                                Builders<Intership>.Filter.Gte(x => x.End, query.End)
+                            ),
+                            Builders<Intership>.Filter.And(
+                                Builders<Intership>.Filter.Gte(x => x.Start, query.Start),
+                                Builders<Intership>.Filter.Lte(x => x.End, query.End)
+                            ),
+                            Builders<Intership>.Filter.And(
+                                Builders<Intership>.Filter.Lte(x => x.Start, query.End),
+                                Builders<Intership>.Filter.Gte(x => x.End, query.End)
+                            )
+                    )
+                );
+            if (!query.IsAllClassroom)
+            {
+                expression = Builders<Intership>.Filter.And(expression, Builders<Intership>.Filter.In(x => x.ClassroomCode, query.ClassroomCodes));
+            }
+            return await service.GetByExpression(expression);
+
+        }
+
         public async Task<IEnumerable<IntershipView>> GetIntershipByCenterAndTime(ReportQuery query)
         {
             var service = _provider.GetRequiredService<IIntershipService>();

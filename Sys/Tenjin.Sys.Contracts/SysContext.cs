@@ -35,6 +35,8 @@ namespace Tenjin.Sys.Contracts
 
         public IRepository<EmployeeCourse> EmployeeCourseRepository => ResolveRepository<EmployeeCourse>();
 
+        public IRepository<Classroom> ClassroomRepository => ResolveRepository<Classroom>();
+
         public override IRepository<T> ResolveRepository<T>()
         {
             return new SysRepository<T>(GetDatabase());

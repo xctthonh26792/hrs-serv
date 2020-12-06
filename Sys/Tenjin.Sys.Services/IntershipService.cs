@@ -29,7 +29,9 @@ namespace Tenjin.Sys.Services
             return new IntershipData
             {
                 Students = await FetchStudent(),
-                Facutlies = await FetchFacutly()
+                Facutlies = await FetchFacutly(),
+                Classrooms = await FetchClassroom()
+
             };
             async Task<IEnumerable<Student>> FetchStudent()
             {
@@ -40,6 +42,12 @@ namespace Tenjin.Sys.Services
             {
                 return await _context.FacutlyRepository.GetByExpression(x => x.IsPublished);
             }
+
+            async Task<IEnumerable<Classroom>> FetchClassroom()
+            {
+                return await _context.ClassroomRepository.GetByExpression(x => x.IsPublished);
+            }
+
         }
         
         public async Task<bool> Validate(Intership entity)
@@ -100,6 +108,7 @@ namespace Tenjin.Sys.Services
                 .Lookup("facutly", "facutly_code", "_id", "facutly").Unwind("facutly", unwind)
                 .Lookup("center", "center_code", "_id", "center").Unwind("center", unwind)
                 .Lookup("major", "major_code", "_id", "major").Unwind("major", unwind)
+                .Lookup("classroom", "classroom_code", "_id", "classroom").Unwind("classroom", unwind)
                 .As<IntershipView>().Match(context.GetPostExpression());
         }
 
@@ -147,6 +156,7 @@ namespace Tenjin.Sys.Services
                         .Set(x => x.StudentCode, entity.StudentCode)
                         .Set(x => x.FacutlyCode, entity.FacutlyCode)
                         .Set(x => x.CenterCode, entity.CenterCode)
+                        .Set(x => x.ClassroomCode, entity.ClassroomCode)
                         .Set(x => x.Course, entity.Course)
                         .Set(x => x.MajorCode, entity.MajorCode)
                         .Set(x => x.Class, entity.Class)

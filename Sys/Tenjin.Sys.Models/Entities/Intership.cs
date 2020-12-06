@@ -28,6 +28,9 @@ namespace Tenjin.Sys.Models.Entities
         public string Class { get; set; }
 
         [BsonProperty(BsonDirection.DESC)]
+        public ObjectId ClassroomCode { get; set; }
+
+        [BsonProperty(BsonDirection.DESC)]
         public string Start { get; set; }
 
         [BsonProperty(BsonDirection.DESC)]

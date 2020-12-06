@@ -29,6 +29,9 @@ namespace Tenjin.Sys.Models.Entities
         public string Class { get; set; }
 
         [BsonProperty(BsonDirection.DESC)]
+        public ObjectId ClassroomCode { get; set; }
+
+        [BsonProperty(BsonDirection.DESC)]
         public ObjectId CenterCode { get; set; }
 
         public override string ValueToSearch => $"{DefCode?.ToSeoUrl()} {Name?.ToSeoUrl()} {Course?.ToSeoUrl()} {Class?.ToSeoUrl()}";

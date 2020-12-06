@@ -18,5 +18,6 @@ namespace Tenjin.Sys.Contracts.Interfaces
         IRepository<Student> StudentRepository { get; }
         IRepository<Intership> IntershipRepository { get; }
         IRepository<EmployeeCourse> EmployeeCourseRepository { get; }
+        IRepository<Classroom> ClassroomRepository { get; }
     }
 }

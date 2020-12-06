@@ -9,5 +9,7 @@ namespace Tenjin.Sys.Models.Views
         public Center Center { get; set; }
 
         public Major Major { get; set; }
+
+        public Classroom Classroom { get; set; }
     }
 }

@@ -114,7 +114,8 @@ namespace Tenjin.Sys.Apis.Controllers
                         buffer.Intership.CenterCode = employee.CenterCode;
                         buffer.Intership.Course = employee.Course;
                         buffer.Intership.MajorCode = employee.MajorCode;
-                        buffer.Intership.Class = employee.Class;
+                        // buffer.Intership.Class = employee.Class;
+                        buffer.Intership.ClassroomCode = employee.ClassroomCode;
                     }
                 }
                 buffer.Intership.CreatedDate = DateTime.Now;

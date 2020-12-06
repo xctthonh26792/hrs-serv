@@ -52,6 +52,12 @@ namespace Tenjin.Sys.Apis.Controllers
             return Ok(await _service.GetIntershipByFacutlyAndTime(query));
         }
 
+        [HttpPost("intershipbyclassroom")]
+        public async Task<IActionResult> GetIntershipByClassroomAndTime([FromBody] ReportQuery query)
+        {
+            return Ok(await _service.GetIntershipByClassroomAndTime(query));
+        }
+
         [HttpPost("coursetime")]
         public async Task<IActionResult> GetTotalTimeByEmployeeAndTime([FromBody] ReportQuery query)
         {

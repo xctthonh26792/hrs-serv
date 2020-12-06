@@ -18,6 +18,9 @@ namespace Tenjin.Sys.Services.Interfaces
         Task<IEnumerable<EmployeeCourseView>> GetCourseByCourse(ReportQuery query);
 
         Task<IEnumerable<IntershipView>> GetIntershipByFacutlyAndTime(ReportQuery query);
+
+        Task<IEnumerable<IntershipView>> GetIntershipByClassroomAndTime(ReportQuery query);
+
         Task<IEnumerable<IntershipView>> GetIntershipByCenterAndTime(ReportQuery query);
     }
 }

@@ -8,5 +8,7 @@ namespace Tenjin.Sys.Models.Cores
         public IEnumerable<Center> Centers { get; set; }
 
         public IEnumerable<Major> Majors { get; set; }
+
+        public IEnumerable<Classroom> Classrooms { get; set; }
     }
 }

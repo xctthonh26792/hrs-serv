@@ -8,5 +8,7 @@ namespace Tenjin.Sys.Models.Cores
         public IEnumerable<Student> Students { get; set; }
 
         public IEnumerable<Facutly> Facutlies { get; set; }
+
+        public IEnumerable<Classroom> Classrooms { get; set; }
     }
 }

@@ -29,6 +29,7 @@ namespace Tenjin.Sys.Services
             var unwind = new AggregateUnwindOptions<BsonDocument> { PreserveNullAndEmptyArrays = true };
             return mappings.Lookup("center", "center_code", "_id", "center").Unwind("center", unwind)
                 .Lookup("major", "major_code", "_id", "major").Unwind("major", unwind)
+                .Lookup("classroom", "classroom_code", "_id", "classroom").Unwind("classroom", unwind)
                 .As<StudentView>().Match(context.GetPostExpression());
         }
 
@@ -79,6 +80,7 @@ namespace Tenjin.Sys.Services
                         .Set(x => x.Phone, entity.Phone)
                         .Set(x => x.Course, entity.Course)
                         .Set(x => x.MajorCode, entity.MajorCode)
+                        .Set(x => x.ClassroomCode, entity.ClassroomCode)
                         .Set(x => x.Class, entity.Class)
                         .Set(x => x.CenterCode, entity.CenterCode)
                         .Set(x => x.ValueToSearch, entity.ValueToSearch)
@@ -110,7 +112,8 @@ namespace Tenjin.Sys.Services
             return new StudentData
             {
                 Centers = await FetchCenter(),
-                Majors = await FetchMajor()
+                Majors = await FetchMajor(),
+                Classrooms = await FetchClassroom()
             };
 
             async Task<IEnumerable<Center>> FetchCenter()
@@ -121,6 +124,11 @@ namespace Tenjin.Sys.Services
             async Task<IEnumerable<Major>> FetchMajor()
             {
                 return await _context.MajorRepository.GetByExpression(x => x.IsPublished);
+            }
+
+            async Task<IEnumerable<Classroom>> FetchClassroom()
+            {
+                return await _context.ClassroomRepository.GetByExpression(x => x.IsPublished);
             }
         }
     }
