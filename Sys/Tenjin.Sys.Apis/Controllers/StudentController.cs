@@ -109,6 +109,25 @@ namespace Tenjin.Sys.Apis.Controllers
                     }
                 }
 
+                if (string.IsNullOrEmpty(student.ClassCode))
+                {
+                    buffer.Errors.Add("Mã lớp trống");
+                    buffer.Index = row;
+                }
+                else
+                {
+                    var classroom = data?.Classrooms.ToList()?.FirstOrDefault(x => x.DefCode == student.ClassCode);
+                    if (classroom == null)
+                    {
+                        buffer.Errors.Add("Không tìm thấy lớp trên hệ thống");
+                        buffer.Index = row;
+                    }
+                    else
+                    {
+                        buffer.Student.ClassroomCode = classroom.Id.ToObjectId();
+                    }
+                }
+
                 list.Add(buffer);
             }
 

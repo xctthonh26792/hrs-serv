@@ -180,6 +180,8 @@ namespace Tenjin.Sys.Apis.Controllers
             await _service.Import(listToInsert);
             return Ok();
         }
+
+       
     }
 
     public class IntershipBuffer

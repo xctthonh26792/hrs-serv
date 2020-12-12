@@ -13,5 +13,6 @@ namespace Tenjin.Sys.Services.Interfaces
         Task<IntershipData> GetDataForIntershipAction();
 
         Task Import(IEnumerable<Intership> entities);
+
     }
 }

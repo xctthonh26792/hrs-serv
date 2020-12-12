@@ -9,7 +9,7 @@
         public string Email { get; set; }
         public string Course { get; set; }
         public string MajorCode { get; set; }
-        public string Class { get; set; }
+        public string ClassCode { get; set; }
         public string CenterCode { get; set; }
 
     }

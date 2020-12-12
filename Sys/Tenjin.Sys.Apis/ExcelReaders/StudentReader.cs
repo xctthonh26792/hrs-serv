@@ -23,7 +23,7 @@ namespace Tenjin.Sys.Apis.ExcelReaders
                 CenterCode = GetString(maps.Cell(6)),
                 Course = GetString(maps.Cell(8)),
                 MajorCode = GetString(maps.Cell(9)),
-                Class = GetString(maps.Cell(11))
+                ClassCode = GetString(maps.Cell(11))
             };
         }
     }
